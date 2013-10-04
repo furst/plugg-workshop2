@@ -4,6 +4,7 @@ namespace controller;
 
 require_once('model/Member.php');
 require_once('model/MemberList.php');
+require_once('view/Member.php');
 
 class Member {
 
@@ -16,32 +17,29 @@ class Member {
 		}
 	}
 
-	public function renderList() {
+	public function renderFullList() {
+		$memberView = new \view\Member();
 		$memberList = new \model\MemberList();
 
-		$html = '<ul>';
+		$content = $memberView->getFullMemberList($memberList);
 
-		foreach ($memberList->getMembers() as $member) {
-			$html .=
-			"
-				<li>$member->name</li>
-			";
-		}
-
-		$html .= '</ul>';
-
-		return $html;
+		return $content;
 	}
 
-	public function render() {
+	public function renderCompactList() {
+		$memberView = new \view\Member();
+		$memberList = new \model\MemberList();
 
-		return
-		"
-			<form method='POST' action=''>
-				<input type='text' name='name' id='name' placeholder='Namn'>
-				<input type='text' name='ssn' id='ssn' placeholder='Personnummer'>
-				<input type='submit' name='submitMember' id='submitMember'>
-			</form>
-		";
+		$content = $memberView->getCompactMemberList($memberList);
+
+		return $content;
+	}
+
+	public function renderForm() {
+		$memberView = new \view\Member();
+		
+		$content = $memberView->addNewMember();
+
+		return $content;
 	}
 }

@@ -10,18 +10,23 @@ $mainView = new view\MainView();
 $home = new view\Home();
 $content = $home->content();
 
-$memberList = new model\MemberList();
+// $memberList = new model\MemberList();
 
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
         case 'addMember':
             $command = new controller\Member();
-            $content = $command->render();
+            $content = $command->renderForm();
             break;
 
-        case 'listMembers':
+        case 'listMembersFull':
             $command = new controller\Member();
-            $content = $command->renderList();
+            $content = $command->renderFullList();
+            break;
+
+        case 'listMembersCompact':
+            $command = new controller\Member();
+            $content = $command->renderCompactList();
             break;
 
         case 'list':
