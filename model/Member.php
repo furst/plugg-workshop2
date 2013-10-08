@@ -8,13 +8,13 @@ class Member {
 	public $ssn;
 	public $id;
 
-	public function __construct($name, $ssn, $id) {
+	public function set($name, $ssn, $id) {
 		$this->name = $name;
 		$this->ssn = $ssn;
 		$this->id = $id;
 	}
 
-	public function get() {
+	public function get($id) {
 		$con = mysqli_connect("localhost","root","root","workshop2");
 		// Check connection
 		if (mysqli_connect_errno()) {
@@ -24,20 +24,22 @@ class Member {
 		$result = mysqli_query($con,"SELECT * FROM member WHERE id='$id'");
 
 		while($row = mysqli_fetch_array($result)) {
-			
+			$this->name = $row['name'];
+			$this->ssn = $row['ssn'];
+			$this->id = $row['id'];
 		}
 
 		mysqli_close($con);
 	}
 
-	public function save() {
+	public function create($name, $ssn) {
 		$con = mysqli_connect("localhost","root","root","workshop2");
 		// Check connection
 		if (mysqli_connect_errno()) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 
-		mysqli_query($con,"INSERT INTO member (name, ssn) VALUES ('$this->name', '$this->ssn')");
+		mysqli_query($con,"INSERT INTO member (name, ssn) VALUES ('$name', '$ssn')");
 
 		mysqli_close($con);
 	}
@@ -62,6 +64,9 @@ class Member {
 		}
 
 		mysqli_query($con,"UPDATE member SET name='$name', ssn='$ssn' WHERE id='$id'");
+
+		$this->name = $name;
+		$this->ssn = $ssn;
 
 		mysqli_close($con);
 	}

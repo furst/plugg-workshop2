@@ -23,7 +23,8 @@ class MemberList {
 		$result = mysqli_query($con,"SELECT * FROM member");
 
 		while($row = mysqli_fetch_array($result)) {
-			$newMember = new \model\Member($row['name'], $row['ssn'], $row['id']);
+			$newMember = new \model\Member();
+			$newMember->set($row['name'], $row['ssn'], $row['id']);
 			$this->memberList[] = $newMember;
 		}
 

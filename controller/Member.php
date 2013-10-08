@@ -4,44 +4,62 @@ namespace controller;
 
 require_once('model/Member.php');
 require_once('model/MemberList.php');
+require_once('view/MemberForm.php');
+require_once('view/MemberList.php');
+require_once('view/SingleMember.php');
+require_once('controller/Redirect.php');
 
 class Member {
 
-	public function __construct() {
-		if (isset($_POST['submitMember'])) {
-			$newMember = new \model\Member($_POST['name'], $_POST['ssn'], uniqid());
-			$newMember->save();
-			$newMember->delete(1);
-			$newMember->edit('2', 'tjenahoppsan2', '1234567');
-		}
-	}
-
-	public function renderList() {
+	public function smallList() {
 		$memberList = new \model\MemberList();
+		$memberListView = new \view\MemberList($memberList);
+		$memberListView->render();
+	}
 
-		$html = '<ul>';
+	public function addMember() {
+		$memberFormView = new \view\MemberForm();
+		$memberFormView->render();
 
-		foreach ($memberList->getMembers() as $member) {
-			$html .=
-			"
-				<li>$member->name</li>
-			";
+		if (isset($_POST['submitMember'])) {
+			$newMember = new \model\Member();
+			$newMember->create($_POST['name'], $_POST['ssn']);
+		}
+	}
+
+	public function singleMember($id) {
+		$member = new \model\Member();
+		$member->get($id);
+
+		$singleMemberView = new \view\SingleMember($member);
+		$singleMemberView->render();
+	}
+
+	public function deleteMember($id) {
+		$member = new \model\Member();
+		$member->delete($id);
+
+		Redirect::to('?page=listMembers');
+	}
+
+	public function editMember($id) {
+		$member = new \model\Member();
+		$member->get($id);
+
+		$memberFormView = new \view\MemberForm();
+
+		if (isset($_POST['submitMember'])) {
+			$member->edit($_GET['editMember'], $_POST['name'], $_POST['ssn']);
 		}
 
-		$html .= '</ul>';
-
-		return $html;
+		$memberFormView->render($member->name, $member->ssn);
 	}
 
-	public function render() {
 
-		return
-		"
-			<form method='POST' action=''>
-				<input type='text' name='name' id='name' placeholder='Namn'>
-				<input type='text' name='ssn' id='ssn' placeholder='Personnummer'>
-				<input type='submit' name='submitMember' id='submitMember'>
-			</form>
-		";
-	}
+
+
+
+
+
+
 }

@@ -6,7 +6,7 @@ class MainView {
 
 	private $title;
 
-	public function content($content) {
+	public function header() {
 
 		echo
 		"
@@ -18,11 +18,18 @@ class MainView {
 				<link rel='stylesheet' href='style.css'>
 			</head>
 			<body>
-				<h1>Båtklubben glada piraten</h1>
+				<h1>Glada piraten</h1>
 				<hr>
-				$content
+		";
+
+		return $this;
+	}
+
+	public function footer() {
+
+		echo
+		"
 				<hr>
-				2013
 			</body>
 			</html>
 		";
