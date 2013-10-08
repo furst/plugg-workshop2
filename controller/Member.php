@@ -6,6 +6,7 @@ require_once('model/Member.php');
 require_once('model/MemberList.php');
 require_once('view/MemberForm.php');
 require_once('view/MemberList.php');
+require_once('view/MemberFullList.php');
 require_once('view/SingleMember.php');
 require_once('controller/Redirect.php');
 
@@ -15,6 +16,12 @@ class Member {
 		$memberList = new \model\MemberList();
 		$memberListView = new \view\MemberList($memberList);
 		$memberListView->render();
+	}
+
+	public function bigList() {
+		$memberList = new \model\MemberList();
+		$memberFullListView = new \view\MemberFullList($memberList);
+		$memberFullListView->render();
 	}
 
 	public function addMember() {
@@ -53,6 +60,7 @@ class Member {
 		}
 
 		$memberFormView->render($member->name, $member->ssn);
+		\view\SingleMember::backLink($id);
 	}
 
 

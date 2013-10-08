@@ -2,20 +2,18 @@
 
 namespace model;
 
-require_once('model/BoatList.php');
+class Boat {
 
-class Member {
-
-	public $name;
-	public $ssn;
+	public $type;
+	public $length;
 	public $id;
-	public $boats = array();
+	public $memberId;
 
-	public function set($name, $ssn, $id, $boats) {
-		$this->name = $name;
-		$this->ssn = $ssn;
+	public function set($type, $length, $id, $memberId) {
+		$this->type = $type;
+		$this->length = $length;
 		$this->id = $id;
-		$this->boats = $boats;
+		$this->memberId = $memberId;
 	}
 
 	public function get($id) {
@@ -25,28 +23,26 @@ class Member {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 
-		$result = mysqli_query($con,"SELECT * FROM member WHERE id='$id'");
+		$result = mysqli_query($con,"SELECT * FROM boat WHERE id='$id'");
 
 		while($row = mysqli_fetch_array($result)) {
-			$this->name = $row['name'];
-			$this->ssn = $row['ssn'];
+			$this->type = $row['type'];
+			$this->length = $row['length'];
 			$this->id = $row['id'];
-
-			$boatList = new \model\BoatList();
-			$this->boats = $boatList->getMemberBoats($row['id']);
+			$this->memberId = $row['member_id'];
 		}
 
 		mysqli_close($con);
 	}
 
-	public function create($name, $ssn) {
+	public function create($type, $length, $memberId) {
 		$con = mysqli_connect("localhost","root","root","workshop2");
 		// Check connection
 		if (mysqli_connect_errno()) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 
-		mysqli_query($con,"INSERT INTO member (name, ssn) VALUES ('$name', '$ssn')");
+		mysqli_query($con,"INSERT INTO boat (type, length, member_id) VALUES ('$type', '$length', '$memberId')");
 
 		mysqli_close($con);
 	}
@@ -58,22 +54,22 @@ class Member {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 
-		mysqli_query($con, "DELETE FROM member WHERE id='$id'");
+		mysqli_query($con, "DELETE FROM boat WHERE id='$id'");
 
 		mysqli_close($con);
 	}
 
-	public function edit($id, $name, $ssn) {
+	public function edit($id, $type, $length) {
 		$con = mysqli_connect("localhost","root","root","workshop2");
 		// Check connection
 		if (mysqli_connect_errno()) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 
-		mysqli_query($con,"UPDATE member SET name='$name', ssn='$ssn' WHERE id='$id'");
+		mysqli_query($con,"UPDATE boat SET type='$type', length='$length' WHERE id='$id'");
 
-		$this->name = $name;
-		$this->ssn = $ssn;
+		$this->type = $type;
+		$this->length = $length;
 
 		mysqli_close($con);
 	}

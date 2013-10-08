@@ -8,11 +8,6 @@ class MemberList {
 
 	public $memberList = array();
 
-	public function add(\model\Member $member) {
-		$newMember = new \model\Member($member->name, $member->ssn, uniqid());
-		$newMember->save();
-	}
-
 	public function getMembers() {
 		$con = mysqli_connect("localhost","root","root","workshop2");
 		// Check connection
@@ -23,9 +18,11 @@ class MemberList {
 		$result = mysqli_query($con,"SELECT * FROM member");
 
 		while($row = mysqli_fetch_array($result)) {
-			$newMember = new \model\Member();
-			$newMember->set($row['name'], $row['ssn'], $row['id']);
-			$this->memberList[] = $newMember;
+			$member = new \model\Member();
+			$boatList = new \model\BoatList();
+			$boats = $boatList->getMemberBoats($row['id']);
+			$member->set($row['name'], $row['ssn'], $row['id'], $boats);
+			$this->memberList[] = $member;
 		}
 
 		mysqli_close($con);
