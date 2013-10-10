@@ -25,12 +25,13 @@ class Member {
 	}
 
 	public function addMember() {
+		$client = new \view\ClientObserver();
 		$memberFormView = new \view\MemberForm();
 		$memberFormView->render();
 
-		if (isset($_POST['submitMember'])) {
+		if ($client->wantsToSubmitMember()) {
 			$newMember = new \model\Member();
-			$newMember->create($_POST['name'], $_POST['ssn']);
+			$newMember->create($client->setMemberName(), $client->setMemberSSN());
 		}
 	}
 
@@ -46,28 +47,21 @@ class Member {
 		$member = new \model\Member();
 		$member->delete($id);
 
-		Redirect::to('?page=listMembers');
+		Redirect::to('?member=listMembers');
 	}
 
 	public function editMember($id) {
+		$client = new \view\ClientObserver();
 		$member = new \model\Member();
 		$member->get($id);
 
 		$memberFormView = new \view\MemberForm();
 
-		if (isset($_POST['submitMember'])) {
-			$member->edit($_GET['editMember'], $_POST['name'], $_POST['ssn']);
+		if ($client->wantsToSubmitMember()) {
+			$member->edit($client->editMember(), $client->setMemberName(), $client->setMemberSSN());
 		}
 
 		$memberFormView->render($member->name, $member->ssn);
 		\view\SingleMember::backLink($id);
 	}
-
-
-
-
-
-
-
-
 }

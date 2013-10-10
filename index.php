@@ -6,27 +6,45 @@ require_once('controller/Member.php');
 require_once('controller/Boat.php');
 require_once('model/MemberList.php');
 require_once('model/Member.php');
+require_once('view/ClientObserver.php');
 
+/**
+ * @var \view\MainView
+ */
 $mainView = new view\MainView();
+
+/**
+ * @var model\MemberList
+ */
 $memberList = new model\MemberList();
+
+/**
+ * @var view\Home
+ */
 $home = new view\Home();
 
-if (isset($_GET['deleteMember'])) {
+/**
+ * @var view\ClientObserver
+ */
+$client = new view\ClientObserver();
+
+
+if ($client->wantsToDeleteMember()) {
     $member = new controller\Member();
-    $member->deleteMember($_GET['deleteMember']);
+    $member->deleteMember($client->deleteMember());
 }
 
-if (isset($_GET['deleteBoat'])) {
+if ($client->wantsToDeleteBoat()) {
     $boat = new controller\Boat();
-    $boat->deleteBoat($_GET['deleteBoat'], $_GET['viewMember']);
+    $boat->deleteBoat($client->deleteBoat(), $client->viewMember());
 }
 
 $mainView->title('Glada piraten')->header();
 
 $home->render();
 
-if (isset($_GET['page'])) {
-    switch ($_GET['page']) {
+if ($client->wantsToHandleMember()) {
+    switch ($client->handleMember()) {
         case 'addMember':
             $command = new controller\Member();
             $command->addMember();
@@ -44,24 +62,24 @@ if (isset($_GET['page'])) {
     }
 }
 
-if (isset($_GET['addBoat'])) {
+if ($client->wantsToAddBoat()) {
     $boat = new controller\Boat();
     $boat->addBoat();
 }
 
-if (isset($_GET['editBoat'])) {
+if ($client->wantsToEditBoat()) {
     $boat = new controller\Boat();
-    $boat->editBoat($_GET['editBoat']);
+    $boat->editBoat($client->editBoat());
 }
 
-elseif (isset($_GET['viewMember'])) {
+elseif ($client->wantsToViewMember()) {
     $member = new controller\Member();
-    $member->singleMember($_GET['viewMember']);
+    $member->singleMember($client->viewMember());
 }
 
-if (isset($_GET['editMember'])) {
+if ($client->wantsToEditMember()) {
     $member = new controller\Member();
-    $member->editMember($_GET['editMember']);
+    $member->editMember($client->editMember());
 }
 
 $mainView->footer();

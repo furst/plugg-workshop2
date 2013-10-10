@@ -16,7 +16,7 @@ class MemberList {
 		foreach ($this->memberList->getMembers() as $member) {
 			$html .=
 			"
-				<li><a href='?viewMember=$member->id'>$member->name</a>, $member->ssn, " . count($member->boats) . "</li>
+				<li>Namn: <a href='?viewMember=$member->id'>$member->name</a>, Personnr: $member->ssn, Antal båtar: " . count($member->boats) . "</li>
 			";
 		}
 
