@@ -9,15 +9,11 @@ class MemberList {
 	public $memberList = array();
 
 	public function getMembers() {
-		$con = mysqli_connect("localhost","root","root","workshop2");
-		// Check connection
-		if (mysqli_connect_errno()) {
-		  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
+		$con = MemberDAL::connect();
 
-		$result = mysqli_query($con,"SELECT * FROM member");
+		$result = MemberDAL::query($con,"SELECT * FROM member");
 
-		while($row = mysqli_fetch_array($result)) {
+		while($row = MemberDAL::fetch_array($result)) {
 			$member = new \model\Member();
 			$boatList = new \model\BoatList();
 			$boats = $boatList->getMemberBoats($row['id']);
@@ -25,7 +21,7 @@ class MemberList {
 			$this->memberList[] = $member;
 		}
 
-		mysqli_close($con);
+		MemberDAL::close($con);
 
 		return $this->memberList;
 	}
