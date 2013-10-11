@@ -7,9 +7,9 @@ class Home {
 	public function render() {
 		echo
 		"
-		<a href='?member=addMember'>Lägg till medlem</a><br>
-		<a href='?member=listMembers'>Lista medlemmar</a><br>
-		<a href='?member=listFullMembers'>Lista medlemmar - Full vy</a><br>
+		<a href='?member=addMember'>Lägg till medlem</a>
+		<a href='?member=listMembers'>Lista medlemmar - överblick</a>
+		<a href='?member=listFullMembers'>Lista medlemmar - detalj</a>
 		";
 	}
 }

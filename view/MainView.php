@@ -18,7 +18,8 @@ class MainView {
 				<link rel='stylesheet' href='style.css'>
 			</head>
 			<body>
-				<h1>Glada piraten</h1>
+				<h1><a class='home' href='./'>Glada piraten</a></h1>
+				<h3>medlemsregister</h3>
 				<hr>
 		";
 

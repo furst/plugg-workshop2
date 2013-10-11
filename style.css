@@ -1,3 +1,121 @@
 label {
 	display:block;
 }
+
+body {
+	background-color: #f0f0e9;
+	font-family: 'Helvetica Neue';
+	font-size: 13px;
+}
+
+h1, a.home {
+	font-family: "Georgia";
+	font-size: 38px;
+	font-weight: normal;
+	font-style: italic;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	width: 450px;
+	display: block;
+}
+
+h3 {
+	margin-top: -30px;
+	margin-left: 320px;
+	font-style: italic;
+}
+
+a {
+	font-size: 13px;
+	background-color: #c5d7d7;
+	color: #111;
+	padding: 6px;
+	text-decoration: none;
+	line-height: 44px;
+	display: inline;
+	border: 1px solid #b9cfcf;
+	border-radius: 3px;
+}
+
+a.home {
+	background-color: #f0f0e9;
+	border: none;
+}
+
+a.home:hover {
+	background-color: white;
+}
+
+a:hover {
+	background-color: #82aaaa;
+}
+
+ul {
+	width: 40%;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+	border-bottom: 1px solid #fff;
+}
+
+hr {
+	border: 1px dashed #333;
+}
+
+input {
+	padding: 8px;
+}
+
+input#submitMember {
+	height: 33px;
+	width: 109px;
+	border: none;
+	border-radius: 2px;
+}
+
+input#submitMember:hover {
+	background-color: #555;
+}
+
+span.li_label {
+	background-color: #f0f0e9;
+	padding: 3px;
+	font-weight: bold;
+	margin-left: 4px;
+}
+li a {
+	background-color: #f0f0e9 !important;
+	border: none;
+	text-decoration: underline;
+}
+
+.row {
+	display: block;
+	margin-top: 24px;
+}
+
+.row h3 {
+	margin: 0;
+}
+
+p a {
+	display: inline;
+	float: left;
+	margin-right: 4px;
+	line-height: 12px;
+
+}
+
+.row a {
+	background-color: #f0f0e9;
+	text-decoration: underline;
+	display: block;
+	margin-left: 1px;
+	border:none;
+	padding: 0;
+	line-height: 10px;
+	width: 100px;
+	display: block;
+}

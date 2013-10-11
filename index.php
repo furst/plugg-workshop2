@@ -39,7 +39,7 @@ if ($client->wantsToDeleteBoat()) {
     $boat->deleteBoat($client->deleteBoat(), $client->viewMember());
 }
 
-$mainView->title('Glada piraten')->header();
+$mainView->title('Glada piraten - medlemsregister')->header();
 
 $home->render();
 
