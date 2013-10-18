@@ -13,10 +13,10 @@ require_once('view/ClientObserver.php');
  */
 $mainView = new view\MainView();
 
-/**
- * @var model\MemberList
- */
-$memberList = new model\MemberList();
+// /**
+//  * @var model\MemberList
+//  */
+// $memberList = new model\MemberList();
 
 /**
  * @var view\Home

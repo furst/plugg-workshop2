@@ -49,7 +49,7 @@ class Boat {
 		}
 
 		$boatFormView->render($boat->type, $boat->length);
-		\view\SingleMember::deleteBoat($client->editBoat(), $client->editMember());
+		\view\SingleMember::deleteBoat($client->editBoat(), $client->viewMember());
 		\view\SingleMember::backLink($client->viewMember());
 	}
 }
