@@ -1,7 +1,7 @@
 <?php
 
 require_once('view/MainView.php');
-require_once('view/Home.php');
+require_once('view/home.php');
 require_once('controller/Member.php');
 require_once('controller/Boat.php');
 require_once('model/MemberList.php');
