@@ -27,7 +27,7 @@ class MemberFullList {
 			";
 
 			foreach ($member->boats as $boat) {
-				$html .= "$boat->type, $boat->length<br>";
+				$html .= "<strong>Typ:</strong> $boat->type <strong>Längd:</strong> $boat->length cm<br>";
 			}
 
 			$html .= "</p>";
